@@ -35,7 +35,8 @@ public class Restaurante
     public int getY( ){
         return coordenadaY;
     }
-
+    
+    
     public boolean isVisitado( ){
         return visitado;
     }

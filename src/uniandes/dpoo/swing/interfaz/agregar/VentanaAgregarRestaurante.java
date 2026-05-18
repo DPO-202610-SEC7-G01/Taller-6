@@ -88,7 +88,7 @@ public class VentanaAgregarRestaurante extends JFrame
         getContentPane().add(panelCentral, BorderLayout.CENTER);
         
         // Configuración final de la ventana
-        setSize(500, 700);
+        setSize( 400, 600 );
         setTitle("Nuevo Restaurante");
         getContentPane().setBackground(new Color(41, 128, 185));
         setResizable(false);
@@ -105,9 +105,11 @@ public class VentanaAgregarRestaurante extends JFrame
     	int calificacion= panelDetalles.getCalificacion();
     	boolean visitado = panelDetalles.getVisitado();
     	String nombre = panelDetalles.getNombre();
-    	int[] coordenadas = panelMapa.getCoordenadas(); 
-        int corx = coordenadas[0];
-        int cory = coordenadas[1];
+    
+        int[] coordsRel = panelMapa.getCoordenadas();
+        int corx = coordsRel[0];
+        int cory = coordsRel[1];
+        
     	ventanaPrincipal.agregarRestaurante(nombre, calificacion, corx, cory, visitado);
     	
     	dispose( );

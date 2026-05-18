@@ -1,21 +1,23 @@
 package uniandes.dpoo.swing.interfaz.mapa;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import uniandes.dpoo.swing.interfaz.agregar.PanelMapaAgregar;
 import uniandes.dpoo.swing.interfaz.principal.VentanaPrincipal;
 import uniandes.dpoo.swing.mundo.Restaurante;
 
 @SuppressWarnings("serial")
-public class VentanaMapa extends JFrame implements ActionListener
-{
+public class VentanaMapa extends JFrame implements ActionListener{
     /**
      * El comando para reconocer al radio que muestra sólo los restaurantes visitados
      */
@@ -46,32 +48,87 @@ public class VentanaMapa extends JFrame implements ActionListener
      */
     private VentanaPrincipal ventanaPrincipal;
 
+  //Constantes gráficas
+    java.awt.Font fuenteFormulario = new java.awt.Font("My Ugly Handwriting", java.awt.Font.BOLD, 17);
+    Color beige  = new Color(255,253,208); 
+    Color azul  = new Color(255,253,208);
+    java.awt.Image imagenCursor = new javax.swing.ImageIcon("imagenes/Coursor.png").getImage();
+    java.awt.Point puntoClic = new java.awt.Point(30, 30); 
+    java.awt.Cursor cursorEspecial = java.awt.Toolkit.getDefaultToolkit().createCustomCursor(
+        imagenCursor, 
+        puntoClic, 
+        "CursorMapa"
+    );
+    
     public VentanaMapa( VentanaPrincipal ventanaPrincipal, List<Restaurante> restaurantes ){
         this.ventanaPrincipal = ventanaPrincipal;
+        setLayout( new BorderLayout( ) );
+        
+        //Titulo
+        JLabel lblTituloVentana = new JLabel("UBICAR RESTAURANTES", JLabel.CENTER);
+        lblTituloVentana.setFont(fuenteFormulario); 
+        lblTituloVentana.setForeground(beige);
+        lblTituloVentana.setBorder(new javax.swing.border.EmptyBorder(15, 0, 10, 0));
+        getContentPane().add(lblTituloVentana, BorderLayout.NORTH);
+        
+        // Mapa
+        panelMapa = new PanelMapaVisualizar(); 
+        panelMapa.setOpaque(false);
+        getContentPane().add(panelMapa, BorderLayout.CENTER);
+        
+        panelMapa.actualizarMapa(restaurantes);
+        
+        // Botones - CORREGIDO: usar las variables de instancia
+        radioTodos = new JRadioButton("Todos", true);
+        radioVisitados = new JRadioButton("Visitados", false);
+        
+        // CORREGIDO: asignar action commands
+        radioTodos.setActionCommand(TODOS);
+        radioVisitados.setActionCommand(VISITADOS);
+        
+        // CORREGIDO: añadir action listeners
+        radioTodos.addActionListener(this);
+        radioVisitados.addActionListener(this);
 
-        // Agrega el panel donde se muestra el mapa
-        // TODO completar
-
-        // Agrega el panel con los RadioButtons y los configura
-        // TODO completar
-
+        radioTodos.setFont(fuenteFormulario);
+        radioTodos.setForeground(beige);
+        radioTodos.setOpaque(false);
+        
+        radioVisitados.setFont(fuenteFormulario);
+        radioVisitados.setForeground(beige);
+        radioVisitados.setOpaque(false);
+        
+        ButtonGroup grupoFiltros = new ButtonGroup();
+        grupoFiltros.add(radioTodos);
+        grupoFiltros.add(radioVisitados);
+        
+        // CORREGIDO: crear el panel de filtros que faltaba
+        JPanel panelFiltros = new JPanel();
+        panelFiltros.setOpaque(false);
+        panelFiltros.add(radioTodos);
+        panelFiltros.add(radioVisitados);
+        getContentPane().add(panelFiltros, BorderLayout.SOUTH);
+      
         // Termina de configurar la ventana y la muestra
-        pack( );
-        setResizable( false );
+        setSize( 400, 600 );
+        setTitle("Mapa de Restaurantes"); 
+        getContentPane().setBackground(new Color(41, 128, 185));
+        setResizable(false);
         setDefaultCloseOperation( DISPOSE_ON_CLOSE );
-        setLocationRelativeTo( null );
+        setLocationRelativeTo( ventanaPrincipal ); 
+        setCursor(cursorEspecial); 
+        setVisible( true );
     }
-
+    
+    
+    
     @Override
-    public void actionPerformed( ActionEvent e )
-    {
+    public void actionPerformed( ActionEvent e ) {
         String comando = e.getActionCommand( );
-        if( TODOS.equals( comando ) )
-        {
+        if( TODOS.equals( comando ) ) {
             panelMapa.actualizarMapa( ventanaPrincipal.getRestaurantes( true ) );
         }
-        else if( VISITADOS.equals( comando ) )
-        {
+        else if( VISITADOS.equals( comando ) ) {
             panelMapa.actualizarMapa( ventanaPrincipal.getRestaurantes( false ) );
         }
     }

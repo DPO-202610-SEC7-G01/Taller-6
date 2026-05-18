@@ -102,8 +102,9 @@ public class VentanaPrincipal extends JFrame{
     }
     
     public void mostrarVentanaMapa() {
-		// TODO Auto-generated method stub
-		
+    	if (ventanaMapa ==null || !ventanaMapa.isVisible()) {
+    		ventanaMapa = new VentanaMapa( this, getRestaurantes(true) );
+    	}
 	}
 
    

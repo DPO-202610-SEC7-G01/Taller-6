@@ -4,59 +4,74 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import uniandes.dpoo.swing.mundo.Restaurante;
 
 @SuppressWarnings("serial")
-public class PanelMapaVisualizar extends JPanel
-{
-    /**
-     * La etiqueta donde se dibuja el mapa y se hacen las señales de los restaurantes
-     */
-    private JLabel labMapa;
-
-    /**
-     * La lista de restaurantes que se están dibujando en el mapa
-     */
+public class PanelMapaVisualizar extends JPanel {
     private List<Restaurante> restaurantes;
+    private Image imagenMapa; // Guardamos directamente la imagen, no un JLabel
 
-    public PanelMapaVisualizar( )
-    {
-        this.labMapa = new JLabel( new ImageIcon( "./imagenes/mapa.png" ) );
-        labMapa.setBorder( new LineBorder( Color.DARK_GRAY ) );
-        add( labMapa, BorderLayout.CENTER );
+
+    java.awt.Font fuenteFormulario = new java.awt.Font("My Ugly Handwriting", java.awt.Font.BOLD, 17);
+    Color azul = new Color(41, 128, 185);
+
+    public PanelMapaVisualizar() {
+        setLayout(new BorderLayout());
+        this.imagenMapa = new ImageIcon("./imagenes/mapa.png").getImage();
+        setBorder(new LineBorder(Color.DARK_GRAY));
     }
 
     @Override
-    public void paint( Graphics g )
-    {
-        super.paint( g );
-        Graphics2D g2d = ( Graphics2D )g;
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        if (imagenMapa != null) {
+            Graphics2D g2d = (Graphics2D) g;
 
-     // TODO completar y hacer que se vean los nombres de todos los restaurantes en el mapa
+            int anchoOriginal = imagenMapa.getWidth(this);
+            int altoOriginal = imagenMapa.getHeight(this);
+
+            int anchoActual = getWidth();
+            int altoActual = getHeight();
+
+            g2d.drawImage(imagenMapa, 0, 0, anchoActual, altoActual, this);
+
+            if (restaurantes != null && !restaurantes.isEmpty()) {
+                if (anchoOriginal > 0 && altoOriginal > 0 && anchoActual > 0 && altoActual > 0) {
+                    
+                    for (Restaurante r : restaurantes) {
+                        int radio = 6;
+                        int diametro = radio * 2;
+
+               
+                        g2d.setColor(azul);
+                        g2d.fillOval(r.getX() - radio, r.getY() - radio, diametro, diametro);
+
+                        g2d.setColor(Color.BLACK);
+                        g2d.drawOval(r.getX() - radio, r.getY() - radio, diametro, diametro);
+
+                        g2d.setFont(fuenteFormulario);
+                        g2d.setColor(Color.BLACK);
+                        g2d.drawString(r.getNombre(), r.getX() + 10, r.getY() + 5);
+                    }
+                }
+            }
+        }
     }
 
-    /**
-     * Actualiza la lista de restaurantes y llama al método repaint() para que se actualice el mapa
-     * @param nuevosRestaurantes
-     */
-    public void actualizarMapa( List<Restaurante> nuevosRestaurantes )
-    {
-        if( restaurantes != null )
-        {
-            this.restaurantes.clear( );
-            this.restaurantes.addAll( nuevosRestaurantes );
+    public void actualizarMapa(List<Restaurante> nuevosRestaurantes) {
+        if (nuevosRestaurantes != null) {
+            this.restaurantes = new java.util.ArrayList<>(nuevosRestaurantes);
+        } else {
+            this.restaurantes = null;
         }
-        else
-        {
-            this.restaurantes = nuevosRestaurantes;
-        }
-        repaint( );
+        repaint();
     }
 }

@@ -29,7 +29,9 @@ public class PanelMapaAgregar extends JPanel implements MouseListener
      */
     private int y;
     
-    
+    // Constantes gráficas
+    java.awt.Font fuenteFormulario = new java.awt.Font("My Ugly Handwriting", java.awt.Font.BOLD, 17);
+    Color azul = new Color(41, 128, 185);
 
     public PanelMapaAgregar( ){
     	setLayout(new java.awt.BorderLayout());
@@ -49,14 +51,14 @@ public class PanelMapaAgregar extends JPanel implements MouseListener
     public int[] getCoordenadas( ){
         return new int[]{ x, y };
     }
+    
 
     @Override
     public void paint( Graphics g ){
         super.paint( g );
 
-        // Pinta un círculo rojo en la posición designada para el restaurante
         Graphics2D g2d = ( Graphics2D )g;
-        g2d.setColor( Color.red );
+        g2d.setColor(azul);
         g2d.fillOval( x - 3, y - 3, 7, 7 );
     }
 
