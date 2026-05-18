@@ -78,7 +78,10 @@ public class PanelEditarRestaurante extends JPanel{
      * @return
      */
     public boolean getVisitado( ) {
-        // TODO completar
+        String visit = (String)cbbVisitado.getSelectedItem();
+        if (visit == "Si") {
+        	return true;
+        }
         return false;
     }
 
@@ -96,7 +99,7 @@ public class PanelEditarRestaurante extends JPanel{
      * @return
      */
     public String getNombre( ){
-        // TODO completar
-        return "";
+        String nombre = (String)txtNombre.getText();
+        return nombre;
     }
 }

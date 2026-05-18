@@ -2,6 +2,7 @@ package uniandes.dpoo.swing.interfaz.agregar;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -47,50 +48,70 @@ public class VentanaAgregarRestaurante extends JFrame
     );
 
     public VentanaAgregarRestaurante( VentanaPrincipal principal ){    
+    	this.ventanaPrincipal = principal;
         setLayout( new BorderLayout( ) );
 
-        //titulo
+        // Título
         JLabel lblTituloVentana = new JLabel("INGRESAR NUEVO RESTAURANTE", JLabel.CENTER);
         lblTituloVentana.setFont(fuenteFormulario); 
         lblTituloVentana.setForeground(beige);
         lblTituloVentana.setBorder(new javax.swing.border.EmptyBorder(15, 0, 10, 0));
         getContentPane().add(lblTituloVentana, BorderLayout.NORTH);
         
-        // mapa
-        PanelMapaAgregar panelMapa = new PanelMapaAgregar();
+        // Panel central que contendrá mapa + formulario
+        JPanel panelCentral = new JPanel(new BorderLayout());
+        panelCentral.setOpaque(false);
+        
+        // Mapa
+        panelMapa = new PanelMapaAgregar();
         panelMapa.setOpaque(false);
-        getContentPane().add(panelMapa, BorderLayout.CENTER);
+        panelCentral.add(panelMapa, BorderLayout.CENTER);
         
-        // formulario + botones
+        // Formulario con GridLayout (4 filas, 2 columnas) + botones
+        JPanel panelFormularioCompleto = new JPanel(new BorderLayout());
+        panelFormularioCompleto.setOpaque(false);
+        
+        // 
         panelDetalles = new PanelEditarRestaurante();
-        add(panelDetalles,BorderLayout.SOUTH);
-        botonesInferiores(this, panelDetalles);
+        panelDetalles.setLayout(new GridLayout(4, 2, 10, 10));
+        panelDetalles.setOpaque(false);
+        panelDetalles.setBorder(new javax.swing.border.EmptyBorder(10, 20, 10, 20));
         
-        //Configuración final de la ventana
-        setSize(400, 600);
+        // Panel de botones
+        PanelBotonesAgregar panelBotones = new PanelBotonesAgregar(this);
+        panelBotones.setOpaque(false);
+        
+        panelFormularioCompleto.add(panelDetalles, BorderLayout.CENTER);
+        panelFormularioCompleto.add(panelBotones, BorderLayout.SOUTH);
+        
+        panelCentral.add(panelFormularioCompleto, BorderLayout.SOUTH);
+        getContentPane().add(panelCentral, BorderLayout.CENTER);
+        
+        // Configuración final de la ventana
+        setSize(500, 700);
         setTitle("Nuevo Restaurante");
         getContentPane().setBackground(new Color(41, 128, 185));
         setResizable(false);
         setDefaultCloseOperation( DISPOSE_ON_CLOSE );
         setLocationRelativeTo( principal ); 
         setVisible( true );
-    }
-
-  
-    
-    public void botonesInferiores(VentanaAgregarRestaurante ventanaAgregar, JPanel panelContenedor) {
-        PanelBotonesAgregar panelBotones = new PanelBotonesAgregar(ventanaAgregar);
-        panelBotones.setOpaque(false);
-        panelContenedor.add(panelBotones, java.awt.BorderLayout.SOUTH);
+        setCursor(cursorEspecial); 
     }
     
     /**
      * Le pide al panelDetalles los datos del nuevo restaurante y se los envía a la ventana principal para que cree el nuevo restaurante, y luego cierra la ventana.
      */
     public void agregarRestaurante( ) {
-        // TODO completar
+    	int calificacion= panelDetalles.getCalificacion();
+    	boolean visitado = panelDetalles.getVisitado();
+    	String nombre = panelDetalles.getNombre();
+    	int[] coordenadas = panelMapa.getCoordenadas(); 
+        int corx = coordenadas[0];
+        int cory = coordenadas[1];
+    	ventanaPrincipal.agregarRestaurante(nombre, calificacion, corx, cory, visitado);
+    	
     	dispose( );
-    }
+    } 
 
     /**
      * Cierra la ventana sin crear un nuevo restaurante

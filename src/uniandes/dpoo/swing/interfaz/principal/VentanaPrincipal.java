@@ -50,7 +50,7 @@ public class VentanaPrincipal extends JFrame{
     //Constantes gráficas
     java.awt.Font fuenteFormulario = new java.awt.Font("My Ugly Handwriting", java.awt.Font.BOLD, 17);
     Color beige  = new Color(255,253,208); 
-    Color azul  = new Color(255,253,208);
+    Color azul  = new Color(41,128,185);
     java.awt.Image imagenCursor = new javax.swing.ImageIcon("imagenes/Coursor.png").getImage();
     java.awt.Point puntoClic = new java.awt.Point(30, 30); 
     java.awt.Cursor cursorEspecial = java.awt.Toolkit.getDefaultToolkit().createCustomCursor(
@@ -64,22 +64,23 @@ public class VentanaPrincipal extends JFrame{
         setLayout( new BorderLayout( ) ); //organiza en centro,sur,este... 
         this.setCursor(cursorEspecial); //cursor
                 
+
         //Botones superioes
         // Dentro de su creación tiene su respectiva lógica, abrir para hacer un nuevo panel
         // o abrir los que ya conocemos
         pBotones = new PanelBotones( this );
         add( pBotones, BorderLayout.NORTH ); 
         
-       
+        //Lista del Centro 
         pLista = new PanelLista( this );
         add( pLista );
-
+        
         pDetalles = new PanelDetallesRestaurante( );
         add( pDetalles, BorderLayout.SOUTH );
 
         // Actualiza los restaurantes que se muestran
         actualizarRestaurantes( );
-
+        
         // Termina de configurar la ventana
         pBotones.setBackground(new Color(41, 128, 185));
         
@@ -106,9 +107,6 @@ public class VentanaPrincipal extends JFrame{
 	}
 
    
-
-  
-
     /**
      * Agrega un nuevo restaurante al diario y actualiza la información que se muestra
      * @param nombre El nombre del nuevo restaurante
@@ -120,6 +118,7 @@ public class VentanaPrincipal extends JFrame{
     public void agregarRestaurante( String nombre, int calificacion, int x, int y, boolean visitado ){
         Restaurante restaurante= new Restaurante(nombre,calificacion,x,y,visitado);
         mundo.agregarRestaurante(restaurante);
+        actualizarRestaurantes();
     }
 
     /**
@@ -138,7 +137,7 @@ public class VentanaPrincipal extends JFrame{
      */
     private void actualizarRestaurantes( ){
         List<Restaurante> todos = this.mundo.getRestaurantes( true );
-        // TODO completar actualizarRestaurantes
+        pLista.actualizarRestaurantes(todos);
     }
 
     /**
@@ -146,6 +145,7 @@ public class VentanaPrincipal extends JFrame{
      * @param seleccionado
      */
     public void cambiarRestauranteSeleccionado( Restaurante seleccionado ){
+    	
         pDetalles.actualizarRestaurante( seleccionado );
     }
 

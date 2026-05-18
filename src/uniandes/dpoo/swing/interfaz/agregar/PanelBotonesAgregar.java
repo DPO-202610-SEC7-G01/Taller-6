@@ -14,12 +14,12 @@ public class PanelBotonesAgregar extends JPanel implements ActionListener
     /**
      * El comando utilizado para el botón que sirve para crear un nuevo restaurante
      */
-    private static final String CREAR = "nuevo";
+    private static final String CREAR = "Nuevo";
 
     /**
      * El comando utilizado para el botón que sirve para cerrar la ventana sin crear un restaurante
      */
-    private static final String CERRAR = "ver";
+    private static final String CERRAR = "Ver";
 
     public JButton butNuevo;
     public JButton butCerrar;
