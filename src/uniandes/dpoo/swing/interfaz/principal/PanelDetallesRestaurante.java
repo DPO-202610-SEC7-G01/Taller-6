@@ -28,8 +28,7 @@ public class PanelDetallesRestaurante extends JPanel
      */
     private JCheckBox chkVisitado;
 
-    public PanelDetallesRestaurante( )
-    {
+    public PanelDetallesRestaurante( ){
         // Configura la etiqueta para el nombre
         // TODO completar el constructor
 
@@ -49,8 +48,7 @@ public class PanelDetallesRestaurante extends JPanel
      * @param calificacion
      * @param visitado
      */
-    private void actualizarRestaurante( String nombre, int calificacion, boolean visitado )
-    {
+    private void actualizarRestaurante( String nombre, int calificacion, boolean visitado ){
      // TODO completar actualizarRestaurante
     }
 
@@ -58,8 +56,7 @@ public class PanelDetallesRestaurante extends JPanel
      * Actualiza los datos que se muestran de un restaurante
      * @param r El restaurante que se debe mostrar
      */
-    public void actualizarRestaurante( Restaurante r )
-    {
+    public void actualizarRestaurante( Restaurante r ) {
         this.actualizarRestaurante( r.getNombre( ), r.getCalificacion( ), r.isVisitado( ) );
     }
 
@@ -68,8 +65,7 @@ public class PanelDetallesRestaurante extends JPanel
      * @param calificacion La calificación del restaurante, que debe ser un numero entre 1 y 5.
      * @return Una imagen a la que corresponde la calificación
      */
-    private ImageIcon buscarIconoCalificacion( int calificacion )
-    {
+    private ImageIcon buscarIconoCalificacion( int calificacion ){
         String imagen = "./imagenes/stars" + calificacion + ".png";
         return new ImageIcon( imagen );
     }

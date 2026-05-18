@@ -12,8 +12,7 @@ public class Restaurante
 
     public boolean visitado;
 
-    public Restaurante( String nombre, int calificacion, int x, int y, boolean visitado )
-    {
+    public Restaurante( String nombre, int calificacion, int x, int y, boolean visitado ){
         this.nombre = nombre;
         this.calificacion = calificacion;
         this.coordenadaX = x;
@@ -21,34 +20,28 @@ public class Restaurante
         this.visitado = visitado;
     }
 
-    public String getNombre( )
-    {
+    public String getNombre( ){
         return nombre;
     }
 
-    public int getCalificacion( )
-    {
+    public int getCalificacion( ){
         return calificacion;
     }
 
-    public int getX( )
-    {
+    public int getX( ){
         return coordenadaX;
     }
 
-    public int getY( )
-    {
+    public int getY( ){
         return coordenadaY;
     }
 
-    public boolean isVisitado( )
-    {
+    public boolean isVisitado( ){
         return visitado;
     }
 
     @Override
-    public String toString( )
-    {
+    public String toString( ){
      // TODO completar para que retorne el nombre del restaurante
         return super.toString( );
     }

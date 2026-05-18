@@ -28,9 +28,11 @@ public class PanelMapaAgregar extends JPanel implements MouseListener
      * La coordenada Y del nuevo restaurante
      */
     private int y;
+    
+    
 
-    public PanelMapaAgregar( )
-    {
+    public PanelMapaAgregar( ){
+    	setLayout(new java.awt.BorderLayout());
         this.labMapa = new JLabel( new ImageIcon( "./imagenes/mapa.png" ) );
         labMapa.setBorder( new LineBorder( Color.DARK_GRAY ) );
         labMapa.addMouseListener( this );
@@ -44,14 +46,12 @@ public class PanelMapaAgregar extends JPanel implements MouseListener
      * Retorna las coordenadas del restaurante
      * @return
      */
-    public int[] getCoordenadas( )
-    {
+    public int[] getCoordenadas( ){
         return new int[]{ x, y };
     }
 
     @Override
-    public void paint( Graphics g )
-    {
+    public void paint( Graphics g ){
         super.paint( g );
 
         // Pinta un círculo rojo en la posición designada para el restaurante
@@ -61,31 +61,26 @@ public class PanelMapaAgregar extends JPanel implements MouseListener
     }
 
     @Override
-    public void mouseClicked( MouseEvent e )
-    {
+    public void mouseClicked( MouseEvent e ){
         this.x = e.getX( );
         this.y = e.getY( );
         repaint( );
     }
 
     @Override
-    public void mousePressed( MouseEvent e )
-    {
+    public void mousePressed( MouseEvent e ){
     }
 
     @Override
-    public void mouseReleased( MouseEvent e )
-    {
+    public void mouseReleased( MouseEvent e ){
     }
 
     @Override
-    public void mouseEntered( MouseEvent e )
-    {
+    public void mouseEntered( MouseEvent e ){
     }
 
     @Override
-    public void mouseExited( MouseEvent e )
-    {
+    public void mouseExited( MouseEvent e ){
     }
 
 }

@@ -1,5 +1,6 @@
 package uniandes.dpoo.swing.interfaz.agregar;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
@@ -9,8 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class PanelEditarRestaurante extends JPanel
-{
+public class PanelEditarRestaurante extends JPanel{
     /**
      * El campo para que el usuario ingrese el nombre del restaurante
      */
@@ -26,28 +26,58 @@ public class PanelEditarRestaurante extends JPanel
      */
     private JComboBox<String> cbbVisitado;
 
-    public PanelEditarRestaurante( )
-    {
-        // Crea el campo para el nombre con una etiqueta al frente
-        // TODO completar
-
-        // Crea el selector para la calificación con una etiqueta al frente
-        // TODO completar
-
-        // Crea el selector para indicar si ya ha sido visitado, con una etiqueta al frente
-        // TODO completar
-
-        // Agregar todos los elementos al panel
-        // TODO completar
-
+  //Constantes gráficas
+    java.awt.Font fuenteFormulario = new java.awt.Font("My Ugly Handwriting", java.awt.Font.BOLD, 17);
+    Color beige  = new Color(255,253,208); 
+    Color azul  = new Color(255,253,208);
+    java.awt.Image imagenCursor = new javax.swing.ImageIcon("imagenes/Coursor.png").getImage();
+    java.awt.Point puntoClic = new java.awt.Point(30, 30); 
+    java.awt.Cursor cursorEspecial = java.awt.Toolkit.getDefaultToolkit().createCustomCursor(
+        imagenCursor, 
+        puntoClic, 
+        "CursorMapa"
+    );
+    
+    
+    public PanelEditarRestaurante() {
+        // Inicializar los atributos de la clase primero
+        txtNombre = new JTextField(20);
+        cbbCalificacion = new JComboBox<>(new String[]{"1", "2", "3", "4", "5"});
+        cbbVisitado = new JComboBox<>(new String[]{"Si", "No"});
+        
+        // Configurar layout (opcional, para mejor organización)
+        setLayout(new java.awt.GridLayout(3, 2, 10, 10));
+        
+        // Nombre
+        JLabel lblNombre = new JLabel("Nombre del Restaurante:");
+        lblNombre.setFont(fuenteFormulario);
+        txtNombre.setFont(fuenteFormulario);
+        
+        // Calificacion
+        JLabel lblCategoria = new JLabel("Calificacion:");
+        lblCategoria.setFont(fuenteFormulario);
+        cbbCalificacion.setFont(fuenteFormulario);
+        
+        // Visita
+        JLabel lblVisitad = new JLabel("Visita:");
+        lblVisitad.setFont(fuenteFormulario);
+        cbbVisitado.setFont(fuenteFormulario);
+        
+        // Agregar componentes al panel
+        add(lblNombre);
+        add(txtNombre);
+        add(lblCategoria);
+        add(cbbCalificacion);
+        add(lblVisitad);
+        add(cbbVisitado);
+        setBackground(azul);
     }
 
     /**
      * Indica si en el selector se seleccionó la opción que dice que el restaurante fue visitado
      * @return
      */
-    public boolean getVisitado( )
-    {
+    public boolean getVisitado( ) {
         // TODO completar
         return false;
     }
@@ -56,8 +86,7 @@ public class PanelEditarRestaurante extends JPanel
      * Indica la calificación marcada en el selector
      * @return
      */
-    public int getCalificacion( )
-    {
+    public int getCalificacion( ){
         String calif = ( String )cbbCalificacion.getSelectedItem( );
         return Integer.parseInt( calif );
     }
@@ -66,8 +95,7 @@ public class PanelEditarRestaurante extends JPanel
      * Indica el nombre digitado para el restaurante
      * @return
      */
-    public String getNombre( )
-    {
+    public String getNombre( ){
         // TODO completar
         return "";
     }

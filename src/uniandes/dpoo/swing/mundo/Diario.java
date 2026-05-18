@@ -10,8 +10,7 @@ public class Diario
      */
     private List<Restaurante> restaurantes;
 
-    public Diario( )
-    {
+    public Diario( ){
         this.restaurantes = new ArrayList<Restaurante>( );
     }
 
@@ -42,8 +41,7 @@ public class Diario
      * Agrega un restaurante al diario, al final de la lista
      * @param restaurante
      */
-    public void agregarRestaurante( Restaurante restaurante )
-    {
+    public void agregarRestaurante( Restaurante restaurante ){
         this.restaurantes.add( restaurante );
     }
 }
