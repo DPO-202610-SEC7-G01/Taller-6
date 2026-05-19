@@ -33,6 +33,7 @@ public class PanelMapaAgregar extends JPanel implements MouseListener
     java.awt.Font fuenteFormulario = new java.awt.Font("My Ugly Handwriting", java.awt.Font.BOLD, 17);
     Color azul = new Color(41, 128, 185);
 
+    
     public PanelMapaAgregar( ){
     	setLayout(new java.awt.BorderLayout());
         this.labMapa = new JLabel( new ImageIcon( "./imagenes/mapa.png" ) );

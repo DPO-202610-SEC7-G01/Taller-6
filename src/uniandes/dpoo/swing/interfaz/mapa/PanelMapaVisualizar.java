@@ -2,6 +2,7 @@ package uniandes.dpoo.swing.interfaz.mapa;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -21,11 +22,16 @@ public class PanelMapaVisualizar extends JPanel {
 
     java.awt.Font fuenteFormulario = new java.awt.Font("My Ugly Handwriting", java.awt.Font.BOLD, 17);
     Color azul = new Color(41, 128, 185);
+    public static final int MAP_WIDTH = 400;
+    public static final int MAP_HEIGHT = 400;
 
     public PanelMapaVisualizar() {
         setLayout(new BorderLayout());
         this.imagenMapa = new ImageIcon("./imagenes/mapa.png").getImage();
+        
         setBorder(new LineBorder(Color.DARK_GRAY));
+        setPreferredSize(new Dimension(MAP_WIDTH, MAP_HEIGHT));
+
     }
 
     @Override

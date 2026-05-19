@@ -78,15 +78,12 @@ public class VentanaMapa extends JFrame implements ActionListener{
         
         panelMapa.actualizarMapa(restaurantes);
         
-        // Botones - CORREGIDO: usar las variables de instancia
         radioTodos = new JRadioButton("Todos", true);
         radioVisitados = new JRadioButton("Visitados", false);
         
-        // CORREGIDO: asignar action commands
         radioTodos.setActionCommand(TODOS);
         radioVisitados.setActionCommand(VISITADOS);
         
-        // CORREGIDO: añadir action listeners
         radioTodos.addActionListener(this);
         radioVisitados.addActionListener(this);
 

@@ -107,8 +107,8 @@ public class VentanaAgregarRestaurante extends JFrame
     	String nombre = panelDetalles.getNombre();
     
         int[] coordsRel = panelMapa.getCoordenadas();
-        int corx = coordsRel[0];
-        int cory = coordsRel[1];
+        int corx = coordsRel[0]+20;
+        int cory = coordsRel[1]+90;
         
     	ventanaPrincipal.agregarRestaurante(nombre, calificacion, corx, cory, visitado);
     	
